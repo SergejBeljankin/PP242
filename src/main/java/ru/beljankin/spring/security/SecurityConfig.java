@@ -39,13 +39,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin() // форма логирования по умолчанию
-                .successHandler(loginSuccessHandler) // раскидываем по страницам
+                .successHandler(loginSuccessHandler) // раскидываем по страницам в зависимости от ролей
                 .permitAll();
 
         http.logout()
-                // разрешаем делать логаут всем
                 .permitAll()
-                // указываем URL логаута
+                // URL логаута
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 // указываем URL при удачном логауте
                 .logoutSuccessUrl("/logoutsucsess")

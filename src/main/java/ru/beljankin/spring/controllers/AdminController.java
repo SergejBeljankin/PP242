@@ -57,7 +57,17 @@ public class AdminController {
 
 //
     @PatchMapping("/edit/{id}")
-    public String update(@ModelAttribute("person") Person person, @PathVariable("id") int id) {
+    public String update(@ModelAttribute("person") Person person, @PathVariable("id") int id,
+                         @RequestParam("rolesNames") String[] rolesNames) {
+        Set<Role> roleSet = new HashSet<>();
+        if(rolesNames.length !=0){
+            for (String role: rolesNames) {
+                roleSet.add(roleServise.findRoleByString(role));
+            }
+        } else {
+            roleSet.add(roleServise.findRoleByString("ROLE_USER"));
+        }
+        person.setRoles(roleSet);
         personServise.update(id, person);
         return "redirect:/admin";
     }

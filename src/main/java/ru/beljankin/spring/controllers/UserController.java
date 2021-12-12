@@ -31,16 +31,8 @@ public class UserController {
 
     @GetMapping("/{id}")
     public String userPage(Model model, @PathVariable("id") int id){
-        Person person = new Person();
-        person = personServise.select(id);
-        String userName = userDetailsServiceIpml.loadUserByUsername(person.getUsername()).getUsername();
-        Set<Role> roleset = person.getRoles();
-        model.addAttribute("user",personServise.select(id))
-                .addAttribute("username", personServise.findByUserName(person.getUsername()))
-                .addAttribute("roleSet2", roleServise.findRoleByString("ROLE_MANAGER"))
-                .addAttribute("roleSet", roleset.toString())
-                .addAttribute("userDelais", userName);
-
+        Person person = personServise.select(id);
+        model.addAttribute("user",personServise.select(id));
         return "user/index";
     }
 }
