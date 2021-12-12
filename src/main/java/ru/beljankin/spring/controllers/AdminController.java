@@ -37,14 +37,13 @@ public class AdminController {
     public String create(@ModelAttribute("person") Person person
             , @RequestParam("rolesNames") String[] rolesNames){
 
-        System.out.println(Arrays.toString(rolesNames));
         Set<Role> roleSet = new HashSet<>();
         if(rolesNames.length !=0){
             for (String role: rolesNames) {
-                roleSet.add(roleServise.finRoleByString(role));
+                roleSet.add(roleServise.findRoleByString(role));
             }
         } else {
-            roleSet.add(roleServise.finRoleByString("ROLE_USER"));
+            roleSet.add(roleServise.findRoleByString("ROLE_USER"));
         }
         person.setRoles(roleSet);
         personServise.save(person);

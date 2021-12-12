@@ -20,7 +20,7 @@ public class RoleServiseImpl implements RoleServise{
     }
 
     @Override
-    public Role finRoleByString(String roleName) {
-        return roleDAO.finRoleByString(roleName);
+    public Role findRoleByString(String roleName) {
+        return roleDAO.findRoleByString(roleName);
     }
 }

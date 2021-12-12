@@ -22,6 +22,12 @@
 <p th:text="${username}"/>
 <br>
 <br>
+<br>
+<p th:text="${roleSet}"/>
+<br>
+<p th:text="${roleSet2}"/>
+<br>
+
 <form th:method="POST" th:action="@{/logout}">
     <input type="submit" value="Выход"/>
 </form>

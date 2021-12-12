@@ -4,5 +4,5 @@ import ru.beljankin.spring.model.Role;
 
 public interface RoleServise {
     void save(Role role);
-    Role finRoleByString(String roleName);
+    Role findRoleByString(String roleName);
 }
