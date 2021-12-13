@@ -1,5 +1,7 @@
 package ru.beljankin.spring.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.beljankin.spring.model.Person;
 import ru.beljankin.spring.dao.PersonDAO;
 
@@ -14,6 +16,10 @@ public class PersonServiseImpl implements PersonServise{
 
     private PersonDAO personDAO;
 
+    private BCryptPasswordEncoder bCryptPasswordEncoder () {
+        return new BCryptPasswordEncoder();
+    }
+
     public PersonServiseImpl(PersonDAO personDAO){
         this.personDAO = personDAO;
     }
@@ -25,6 +31,7 @@ public class PersonServiseImpl implements PersonServise{
 
     @Override
     public void save(Person person) {
+        person.setPassword(bCryptPasswordEncoder().encode(person.getPassword()));
         personDAO.save(person);
     }
 
@@ -36,6 +43,7 @@ public class PersonServiseImpl implements PersonServise{
 
     @Override
     public void update(long id, Person person) {
+        person.setPassword(bCryptPasswordEncoder().encode(person.getPassword()));
         personDAO.update(id, person);
     }
 

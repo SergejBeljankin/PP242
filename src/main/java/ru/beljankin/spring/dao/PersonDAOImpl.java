@@ -1,5 +1,7 @@
 package ru.beljankin.spring.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.beljankin.spring.model.Person;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +14,7 @@ import java.util.List;
 @Transactional
 @Repository
 public class PersonDAOImpl implements PersonDAO {
+
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -41,7 +44,8 @@ public class PersonDAOImpl implements PersonDAO {
     public void update(long id, Person personVariable){
         Person person = select(id);
         person.setUsername(personVariable.getUsername());
-        person.setPassword(personVariable.getPassword());
+        person.setPassword(personVariable.getPassword());//
+//        person.setPassword();//
         person.setSurname(personVariable.getSurname());
         person.setName(personVariable.getName());
         person.setRoles(personVariable.getRoles());
